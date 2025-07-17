@@ -301,3 +301,4 @@ cypress/videos/
 cypress/screenshots/
 /coverage
 TODO
+.npmrc

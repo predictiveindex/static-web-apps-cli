@@ -213,9 +213,9 @@ async function createStaticSite(options: SWACLIConfig, credentialChain: TokenCre
 async function chooseOrCreateStaticSite(
   options: SWACLIConfig,
   credentialChain: TokenCredential,
-  subscriptionId: string
+  subscriptionId: string,
 ): Promise<string | StaticSiteARMResource> {
-  const staticSites = await listStaticSites(credentialChain, subscriptionId);
+  const staticSites = await listStaticSites(credentialChain, subscriptionId, options.resourceGroup);
 
   // 1- when there are no static sites
   if (staticSites.length === 0) {
@@ -273,7 +273,7 @@ export async function chooseOrCreateProjectDetails(
   options: SWACLIConfig,
   credentialChain: TokenCredential,
   subscriptionId: string,
-  shouldPrintToken: boolean | undefined
+  shouldPrintToken: boolean | undefined,
 ) {
   const staticSite = (await chooseOrCreateStaticSite(options, credentialChain, subscriptionId)) as StaticSiteARMResource;
 
@@ -336,9 +336,11 @@ export async function listStaticSites(credentialChain: TokenCredential, subscrip
   const staticSites = [];
   const websiteClient = new WebSiteManagementClient(credentialChain, subscriptionId);
 
-  let staticSiteList = websiteClient.staticSites.list();
+  let staticSiteList;
   if (resourceGroup) {
     staticSiteList = websiteClient.staticSites.listStaticSitesByResourceGroup(resourceGroup);
+  } else {
+    staticSiteList = websiteClient.staticSites.list();
   }
 
   for await (let staticSite of staticSiteList) {
@@ -351,7 +353,7 @@ export async function getStaticSiteDeployment(
   credentialChain: TokenCredential,
   subscriptionId: string,
   resourceGroup: string,
-  staticSiteName: string
+  staticSiteName: string,
 ) {
   if (!subscriptionId) {
     logger.error("An Azure subscription is required to access your deployment token.", true);

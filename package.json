@@ -1,6 +1,6 @@
 {
-  "name": "@azure/static-web-apps-cli",
-  "version": "2.0.6",
+  "name": "@predictiveindex/static-web-apps-cli",
+  "version": "2.0.8",
   "description": "Azure Static Web Apps CLI",
   "type": "module",
   "scripts": {
@@ -98,8 +98,11 @@
     "typescript": "^5.5.3",
     "vitest": "^2.0.2"
   },
-  "homepage": "https://github.com/azure/static-web-apps-cli#readme",
+  "homepage": "https://github.com/predictiveindex/static-web-apps-cli#readme",
   "private": false,
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "keywords": [
     "azure",
     "cloud",
@@ -118,11 +121,11 @@
     "python"
   ],
   "bugs": {
-    "url": "https://github.com/azure/static-web-apps-cli/issues"
+    "url": "https://github.com/predictiveindex/static-web-apps-cli/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/azure/static-web-apps-cli.git"
+    "url": "git+https://github.com/predictiveindex/static-web-apps-cli.git"
   },
   "license": "MIT",
   "husky": {
